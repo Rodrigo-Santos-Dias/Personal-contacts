@@ -1,0 +1,11 @@
+<div class="container mt-4">
+  <div class="card shadow p-3">
+    <h2 class="text-center mb-3">Listagem de Funcionários</h2>
+    <app-table 
+      [pessoas]="persons" 
+      (updatePersonEvent)="updatePerson($event)"
+      (deletePersonEvent)="deletePerson($event)"
+      (viewContactsEvent)="goToContacts($event)"> 
+    </app-table>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<table class="table table-dark table-striped table-hover border border-secondary">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Nome</th>
+      <th>Endereço</th>
+      <th>CEP</th>
+      <th>UF</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pessoa of pessoas">
+      <td>{{ pessoa.id }}</td>
+      <td>{{ pessoa.nome }}</td>
+      <td>{{ pessoa.endereco }}</td>
+      <td>{{ pessoa.cep }}</td>
+      <td>{{ pessoa.uf }}</td>
+      <td>
+        <button class="btn btn-outline-warning btn-sm me-2" (click)="updatePerson(pessoa)">
+          ✏️ Editar
+        </button>
+        <button class="btn btn-outline-danger btn-sm me-2" (click)="deletePerson(pessoa.id)">
+          🗑️ Excluir
+        </button>
+        <button class="btn btn-outline-success btn-sm me-2"(click)="viewContacts(pessoa.id)" >
+          📞 Contatos
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

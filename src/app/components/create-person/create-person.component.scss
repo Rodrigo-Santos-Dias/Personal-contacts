@@ -1,0 +1,64 @@
+// Estilos para o tema escuro
+.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+  
+    .form-label {
+      color: #ffffff; // Cor do texto clara
+    }
+  
+    // Estilos para os inputs
+    .form-control {
+      background-color: #222;
+      color: #ffffff;
+      border: 1px solid #444;
+  
+      &::placeholder {
+        color:#bbb; // Cor do texto do placeholder
+      }
+  
+      &:focus {
+        background-color: #333;
+        color: #ffffff;
+        border-color: #00c3ff;
+        box-shadow: 0 0 5px #00c3ff // Efeito de sombra azul no foco
+      }
+    }
+  
+    // Estilo para mensagens de erro
+    .text-danger {
+      color: #dc3545;
+    }
+  
+    // Estilos para o botão
+    .btn-success {
+      background-color: #008c76;
+      border-color: #008c76;
+  
+      &:hover {
+        background-color: #00a88f;
+      }
+    }
+  
+    .btn-secondary {
+      background-color: #444;
+      border-color: #555;
+  
+      &:hover {
+        background-color: #555;
+      }
+  
+      &:disabled {
+        background-color: #6c757d;
+        border-color: #6c757d;
+      }
+    }
+  
+    // Estilos de feedback de validação
+    .invalid-feedback {
+      color: #edff22;
+    }
+  }
+  

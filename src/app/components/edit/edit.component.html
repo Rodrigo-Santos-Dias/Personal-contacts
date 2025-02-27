@@ -1,0 +1,62 @@
+<div *ngIf="person" class="container mt-4 dark-mode">
+  <h2 class="mb-4 text-light">Editar Pessoa</h2>
+
+  <form [formGroup]="editPersonForm" (ngSubmit)="savePerson()">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome:</label>
+      <input type="text" id="nome" class="form-control" formControlName="nome"
+        [ngClass]="{'is-invalid': editPersonForm.controls['nome'].invalid && editPersonForm.controls['nome'].touched}">
+      <div *ngIf="editPersonForm.controls['nome'].invalid && editPersonForm.controls['nome'].touched"
+        class="invalid-feedback">
+        <small *ngIf="editPersonForm.controls['nome'].hasError('required')">O nome é obrigatório.</small>
+        <small *ngIf="editPersonForm.controls['nome'].hasError('minlength')">O nome deve ter pelo menos 3 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="cep" class="form-label">CEP:</label>
+      <input type="text" id="cep" class="form-control" formControlName="cep" (blur)="buscarEndereco()"
+        [ngClass]="{'is-invalid': editPersonForm.controls['cep'].invalid && editPersonForm.controls['cep'].touched}">
+      <div *ngIf="editPersonForm.controls['cep'].invalid && editPersonForm.controls['cep'].touched" class="invalid-feedback">
+        <small *ngIf="editPersonForm.controls['cep'].hasError('required')">O CEP é obrigatório.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Endereço:</label>
+      <input type="text" id="endereco" class="form-control" formControlName="endereco"
+        [ngClass]="{'is-invalid': editPersonForm.controls['endereco'].invalid && editPersonForm.controls['endereco'].touched}">
+      <div *ngIf="editPersonForm.controls['endereco'].invalid && editPersonForm.controls['endereco'].touched"
+        class="invalid-feedback">
+        <small *ngIf="editPersonForm.controls['endereco'].hasError('required')">O endereço é obrigatório.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="cidade" class="form-label">Cidade:</label>
+      <input type="text" id="cidade" class="form-control" formControlName="cidade"
+        [ngClass]="{'is-invalid': editPersonForm.controls['cidade'].invalid && editPersonForm.controls['cidade'].touched}">
+      <div *ngIf="editPersonForm.controls['cidade'].invalid && editPersonForm.controls['cidade'].touched"
+        class="invalid-feedback">
+        <small *ngIf="editPersonForm.controls['cidade'].hasError('required')">A cidade é obrigatória.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="uf" class="form-label">UF:</label>
+      <input type="text" id="uf" class="form-control" formControlName="uf"
+        [ngClass]="{'is-invalid': editPersonForm.controls['uf'].invalid && editPersonForm.controls['uf'].touched}">
+      <div *ngIf="editPersonForm.controls['uf'].invalid && editPersonForm.controls['uf'].touched"
+        class="invalid-feedback">
+        <small *ngIf="editPersonForm.controls['uf'].hasError('required')">A UF é obrigatória.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-success" [disabled]="editPersonForm.invalid">Salvar</button>
+    <button type="button" class="btn btn-outline-danger ms-2" (click)="goBack()">Cancelar</button>
+  </form>
+</div>
+
+<div *ngIf="!person" class="container mt-4">
+  <p class="text-muted">Carregando pessoa...</p>
+</div>

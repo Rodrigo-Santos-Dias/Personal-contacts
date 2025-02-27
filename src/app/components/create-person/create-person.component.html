@@ -1,0 +1,56 @@
+<div class="container mt-4 dark-mode p-4">
+  <h2 class="mb-4 text-light">Cadastrar Pessoa</h2>
+
+  <form [formGroup]="createPersonForm" (ngSubmit)="savePerson()">
+    <div class="mb-3">
+      <label for="nome" class="form-label">Nome:</label>
+      <input type="text" id="nome" class="form-control" formControlName="nome"
+        [ngClass]="{'is-invalid': createPersonForm.controls['nome'].invalid && createPersonForm.controls['nome'].touched}">
+      <div *ngIf="createPersonForm.controls['nome'].invalid && createPersonForm.controls['nome'].touched" class="invalid-feedback">
+        <small *ngIf="createPersonForm.controls['nome'].hasError('required')">O nome é obrigatório.</small>
+        <small *ngIf="createPersonForm.controls['nome'].hasError('minlength')">O nome deve ter pelo menos 3 caracteres.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="cep" class="form-label">CEP:</label>
+      <input type="text" id="cep" class="form-control" formControlName="cep" (blur)="buscarEndereco()"
+        [ngClass]="{'is-invalid': createPersonForm.controls['cep'].invalid && createPersonForm.controls['cep'].touched}">
+      <div *ngIf="createPersonForm.controls['cep'].invalid && createPersonForm.controls['cep'].touched" class="invalid-feedback">
+        <small *ngIf="createPersonForm.controls['cep'].hasError('required')">O CEP é obrigatório.</small>
+        <small *ngIf="createPersonForm.controls['cep'].hasError('pattern')">O CEP deve estar no formato 00000-000.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="endereco" class="form-label">Endereço:</label>
+      <input type="text" id="endereco" class="form-control" formControlName="endereco"
+        [ngClass]="{'is-invalid': createPersonForm.controls['endereco'].invalid && createPersonForm.controls['endereco'].touched}">
+      <div *ngIf="createPersonForm.controls['endereco'].invalid && createPersonForm.controls['endereco'].touched" class="invalid-feedback">
+        <small *ngIf="createPersonForm.controls['endereco'].hasError('required')">O endereço é obrigatório.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="cidade" class="form-label">Cidade:</label>
+      <input type="text" id="cidade" class="form-control" formControlName="cidade"
+        [ngClass]="{'is-invalid': createPersonForm.controls['cidade'].invalid && createPersonForm.controls['cidade'].touched}">
+      <div *ngIf="createPersonForm.controls['cidade'].invalid && createPersonForm.controls['cidade'].touched" class="invalid-feedback">
+        <small *ngIf="createPersonForm.controls['cidade'].hasError('required')">A cidade é obrigatória.</small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="uf" class="form-label">UF:</label>
+      <input type="text" id="uf" class="form-control" formControlName="uf"
+        [ngClass]="{'is-invalid': createPersonForm.controls['uf'].invalid && createPersonForm.controls['uf'].touched}">
+      <div *ngIf="createPersonForm.controls['uf'].invalid && createPersonForm.controls['uf'].touched" class="invalid-feedback">
+        <small *ngIf="createPersonForm.controls['uf'].hasError('required')">A UF é obrigatória.</small>
+        <small *ngIf="createPersonForm.controls['uf'].hasError('minlength')">A UF deve ter exatamente 2 caracteres.</small>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-outline-success " [disabled]="createPersonForm.invalid">Salvar</button>
+    <button type="button" class="btn btn-outline-danger ms-2" (click)="goBack()">Cancelar</button>
+  </form>
+</div>
