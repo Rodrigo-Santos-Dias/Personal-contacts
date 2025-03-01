@@ -1,4 +1,5 @@
-<table class="table table-dark table-striped table-hover border border-secondary">
+<!-- Tabela de Pessoas -->
+<table *ngIf="!isContactsTable" class="table table-dark table-striped table-hover border border-secondary">
   <thead class="thead-dark">
     <tr>
       <th>ID</th>
@@ -23,8 +24,41 @@
         <button class="btn btn-outline-danger btn-sm me-2" (click)="deletePerson(pessoa.id)">
           🗑️ Excluir
         </button>
-        <button class="btn btn-outline-success btn-sm me-2"(click)="viewContacts(pessoa.id)" >
+        <button class="btn btn-outline-success btn-sm me-2" (click)="viewContacts(pessoa.id)">
           📞 Contatos
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Tabela de Contatos -->
+<table *ngIf="isContactsTable" class="table table-dark table-striped table-hover border border-secondary">
+  <thead class="thead-dark">
+    <tr>
+      <th>ID</th>
+      <th>Tipo</th>
+      <th>Contato</th>
+      <th>Ações</th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let contato of contatos">
+      <td>{{ contato.id }}</td>
+      <td>{{ contato.tipoContato === 'TELEFONE' ? '📞 Telefone' : '📱 Celular' }}</td>
+      <td>{{ contato.contato }}</td>
+      
+
+      <td>
+        <button class="btn btn-outline-warning btn-sm me-2" >
+          ✏️Editar
+        </button>
+        <button class="btn btn-outline-danger btn-sm me-2" >
+          🗑️ Excluir
+        </button>
+        <button class="btn btn-outline-success btn-sm me-2" >
+          Novo Contato
         </button>
       </td>
     </tr>

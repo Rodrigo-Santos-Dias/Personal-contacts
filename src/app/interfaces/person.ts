@@ -8,5 +8,5 @@ export interface IPerson {
     cep?: string;
     cidade?: string;
     uf?: string;
-    contatos?: IContact[];
+    contato?: IContact[];
 }

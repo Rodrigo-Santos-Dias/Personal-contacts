@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IPerson } from '../../interfaces/person';
+import { IContact } from '../../interfaces/contacts';
 
 @Component({
   selector: 'app-table',
@@ -10,24 +11,23 @@ import { IPerson } from '../../interfaces/person';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
-  @Input() pessoas: IPerson[] = []; 
+  @Input() pessoas: IPerson[] = [];
+  @Input() contatos: IContact[] = [];
+  @Input() isContactsTable: boolean = false;
+  
   @Output() updatePersonEvent = new EventEmitter<IPerson>();
   @Output() deletePersonEvent = new EventEmitter<number >();
   @Output() viewContactsEvent = new EventEmitter<number>();
   updatePerson(pessoa: IPerson) {
-    console.log('📤 Emitindo evento para edição:', pessoa);
     this.updatePersonEvent.emit(pessoa);
   }
 
   deletePerson(id: number) {
-    console.log("🗑️ Emitindo evento para exclusão:", id); // Log para depuração
-    this.deletePersonEvent.emit(id); // Emitindo o ID da pessoa a ser excluída
+    this.deletePersonEvent.emit(id); 
   }
 
   viewContacts(id:number){
-    console.log("Emitindo evento de contatos")
     this.viewContactsEvent.emit(id);
-  }
- 
-}
+  } 
+};
 

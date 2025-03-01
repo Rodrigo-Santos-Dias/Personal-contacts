@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,9 +9,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router,private utilsService: UtilsService) {}
 
   goToCreatePerson(): void {
     this.router.navigate(['/create-person']);
+  }
+
+  goBack(): void {
+    this.utilsService.goBack();
   }
 }

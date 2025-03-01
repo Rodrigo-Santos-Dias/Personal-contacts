@@ -4,6 +4,7 @@
     color: #ffffff;
     padding: 20px;
     border-radius: 10px;
+    margin-bottom: 20px;
   
     .form-label {
       color: #ffffff; // Cor do texto clara
@@ -16,7 +17,8 @@
       border: 1px solid #444;
   
       &::placeholder {
-        color:#bbb; // Cor do texto do placeholder
+        color:#bbb; 
+      
       }
   
       &:focus {

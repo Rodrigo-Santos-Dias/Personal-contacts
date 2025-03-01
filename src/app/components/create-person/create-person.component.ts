@@ -6,6 +6,7 @@ import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
 import { IPerson } from '../../interfaces/person';
 import { HttpClient } from '@angular/common/http';
+import { UtilsService } from '../../services/utils.service';
 
 @Component({
   selector: 'app-create-person',
@@ -20,8 +21,8 @@ export class CreatePersonComponent {
   constructor(
     private formBuilder: FormBuilder,
     private personService: PersonService,
-    private router: Router,
-    private http: HttpClient
+    private utilsService: UtilsService,
+    private router: Router
   ) {
     this.createPersonForm = this.formBuilder.group({
       nome: ['', [Validators.required, Validators.minLength(3)]],
@@ -34,32 +35,28 @@ export class CreatePersonComponent {
 
   buscarEndereco(): void {
     const cep = this.createPersonForm.get('cep')?.value;
-    if (cep && /^[0-9]{5}-?[0-9]{3}$/.test(cep)) {
-      this.http.get<any>(`https://viacep.com.br/ws/${cep}/json/`).subscribe({
-        next: (dados) => {
-          if (!dados.erro) {
-            this.createPersonForm.patchValue({
-              endereco: `${dados.logradouro}, ${dados.bairro}`,
-              cidade: dados.localidade,
-              uf: dados.uf
-            });
-          } else {
-            Swal.fire("Erro!", "CEP não encontrado.", "error");
-          }
-        },
-        error: () => {
-          Swal.fire("Erro!", "Erro ao buscar o CEP.", "error");
+    if (!cep) return;
+
+    this.utilsService.buscarEndereco(cep).subscribe({
+      next: (dados) => {
+        if (!dados.erro) {
+          console.log("📍 Dados do CEP carregados:", dados);
+          this.createPersonForm.patchValue({
+            endereco: `${dados.logradouro}, ${dados.bairro}`,
+            cidade: dados.localidade,
+            uf: dados.uf
+          });
+        } else {
+          Swal.fire("Erro!", "CEP não encontrado.", "error");
         }
-      });
-    }
+      }
+    });
   }
 
   savePerson(): void {
     console.log('📤 Emitindo evento para edição:');
     if (this.createPersonForm.valid) {
       const newPerson: IPerson = this.createPersonForm.value;
-    console.log('📤 Emitindo evento para edição:',newPerson);
-
       this.personService.createPerson(newPerson).subscribe({
         next: () => {
           Swal.fire("Sucesso!", "Pessoa cadastrada com sucesso!", "success").then(() => {
@@ -76,6 +73,6 @@ export class CreatePersonComponent {
   }
 
   goBack(): void {
-    this.router.navigate(['/']);
+    this.utilsService.goBack();
   }
 }

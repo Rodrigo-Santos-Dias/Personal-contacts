@@ -4,6 +4,7 @@ import { IPerson } from '../../interfaces/person';
 import { PersonService } from '../../services/person.service';
 import { TableComponent } from '../table/table.component';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list',
@@ -21,50 +22,63 @@ export class ListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loadPersons(); // Carrega a lista de pessoas ao inicializar o componente
+    this.loadPersons(); 
   }
 
-  // Método para carregar a lista de pessoas
-  loadPersons(): void {
+    loadPersons(): void {
     this.personService.getPersons().subscribe({
       next: (response: IPerson[]) => { 
         this.persons = response; 
-        console.log("📝 Lista de pessoas carregada ldp:", this.persons); // Log para depuração
+        
       },
       error: (error) => {
-        console.error('❌ Erro ao carregar pessoas:', error);
+        alert('Erro ao carregar pessoas. Verifique o console para mais detalhes.');
       }
     });
   }
 
-  // Método para redirecionar para a página de edição
+  
   updatePerson(person: IPerson): void {
-    console.log("🔀 Redirecionando para edição da pessoa:", person);
     this.router.navigate(['/update-person', person.id]); 
   }
 
-  // Método para excluir uma pessoa
+
   deletePerson(id: number): void {
-    const confirmacao = confirm("Tem certeza que deseja excluir esta pessoa?");
-  
-    if (confirmacao) {
-      this.personService.deletePerson(id).subscribe({
-        next: () => {
-          console.log(`✅ Pessoa com ID ${id} excluída com sucesso!`);
-          
-          // Atualiza a lista de pessoas sem precisar recarregar a página
-          this.persons = this.persons.filter(person => person.id !== id);
-        },
-        error: (error) => {
-          console.error('❌ Erro ao excluir pessoa:', error);
-        }
-      });
-    }
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Esta ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.personService.deletePerson(id).subscribe({
+          next: () => {
+            Swal.fire(
+              'Excluído!',
+              'A pessoa foi excluída com sucesso.',
+              'success'
+            );
+            
+            this.persons = this.persons.filter(person => person.id !== id);
+          },
+          error: (error) => {
+            Swal.fire(
+              'Erro!',
+              'Ocorreu um erro ao excluir a pessoa.',
+              'error'
+            );
+          }
+        });
+      }
+    });
   }
+  
 
   goToContacts(id: number): void {
-    console.log("aqui em go To contacts")
-    this.router.navigate(['/contatos', id]); // Redireciona para a página de contatos
+    this.router.navigate(['/contatos', id]);
   }
   
   

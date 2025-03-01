@@ -1,4 +1,6 @@
-<div class="container mt-4 dark-mode p-4">
+
+<div class="container mt-4 dark-mode p-4 mb-4">
+ 
   <h2 class="mb-4 text-light">Cadastrar Pessoa</h2>
 
   <form [formGroup]="createPersonForm" (ngSubmit)="savePerson()">
@@ -53,4 +55,7 @@
     <button type="submit" class="btn btn-outline-success " [disabled]="createPersonForm.invalid">Salvar</button>
     <button type="button" class="btn btn-outline-danger ms-2" (click)="goBack()">Cancelar</button>
   </form>
+  <div >
+  
 </div>
+
