@@ -40,25 +40,32 @@
       <th>Tipo</th>
       <th>Contato</th>
       <th>Ações</th>
-     
     </tr>
   </thead>
   <tbody>
+   
     <tr *ngFor="let contato of contatos">
       <td>{{ contato.id }}</td>
       <td>{{ contato.tipoContato === 'TELEFONE' ? '📞 Telefone' : '📱 Celular' }}</td>
       <td>{{ contato.contato }}</td>
-      
-
       <td>
         <button class="btn btn-outline-warning btn-sm me-2" >
-          ✏️Editar
+          ✏️ Editar
         </button>
-        <button class="btn btn-outline-danger btn-sm me-2" >
+        <button class="btn btn-outline-danger btn-sm me-2" (click)="(contato.id)">
           🗑️ Excluir
         </button>
-        <button class="btn btn-outline-success btn-sm me-2" >
-          Novo Contato
+        <button class="btn btn-outline-success btn-sm">
+          ➕ Adicionar Contato
+        </button>
+      </td>
+    </tr>
+
+   
+    <tr *ngIf="contatos.length === 0">
+      <td colspan="4" class="text-center">
+        <button class="btn btn-outline-success btn-smmt-3" >
+          ➕ Adicionar Contato
         </button>
       </td>
     </tr>

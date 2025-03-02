@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IPerson } from '../../interfaces/person';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonService } from '../../services/person.service';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from '../table/table.component';
@@ -18,7 +18,7 @@ export class ContactsComponent implements OnInit {
   person: IPerson = {} as IPerson;
   id: number = 0;
 
-constructor(private route: ActivatedRoute, private personService: PersonService,private utilsService: UtilsService  ) {}
+constructor(private route: ActivatedRoute, private personService: PersonService,private utilsService: UtilsService,  private router: Router  ) {}
 
 ngOnInit(): void {
   this.route.paramMap.subscribe(params => {
@@ -54,4 +54,8 @@ loadPerson(): void {
 goBack(): void {
   this.utilsService.goBack();
 }
+
+
+
+
 }

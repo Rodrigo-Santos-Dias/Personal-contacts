@@ -1,5 +1,5 @@
 <div *ngIf="person" class="container mt-4 dark-mode">
-  <h2 class="mb-4 text-light">Editar Pessoa</h2>
+  <h2 class="mb-4 text-light">Editar informações de {{ person.nome }}</h2>
 
   <form [formGroup]="editPersonForm" (ngSubmit)="savePerson()">
     <div class="mb-3">

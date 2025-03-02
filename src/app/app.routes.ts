@@ -6,11 +6,11 @@ import { TableComponent } from './components/table/table.component';
 import { CreatePersonComponent } from './components/create-person/create-person.component';
 import { ContactsComponent } from './components/contacts/contacts.component';
 
+
 export const routes: Routes = [
     {path: "" ,component: ListComponent},
     {path: "list", component: ListComponent},
     {path:"update-person/:id", component: EditComponent},
     {path:"create-person", component: CreatePersonComponent},
-    { path: "contatos/:id", component: ContactsComponent }
-
+    {path: "contatos/:id", component: ContactsComponent }
 ];

@@ -11,6 +11,7 @@ import { IContact } from '../../interfaces/contacts';
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent {
+
   @Input() pessoas: IPerson[] = [];
   @Input() contatos: IContact[] = [];
   @Input() isContactsTable: boolean = false;
@@ -18,6 +19,8 @@ export class TableComponent {
   @Output() updatePersonEvent = new EventEmitter<IPerson>();
   @Output() deletePersonEvent = new EventEmitter<number >();
   @Output() viewContactsEvent = new EventEmitter<number>();
+ 
+  
   updatePerson(pessoa: IPerson) {
     this.updatePersonEvent.emit(pessoa);
   }

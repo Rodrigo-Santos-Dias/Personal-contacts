@@ -23,14 +23,13 @@ export class UtilsService {
 
 
   buscarEndereco(cep: string): Observable<any> {
-    const cepFormatado = cep.replace(/\D/g, ''); // Remove caracteres não numéricos
+    const cepFormatado = cep.replace(/\D/g, ''); 
 
     if (!/^[0-9]{8}$/.test(cepFormatado)) {
       Swal.fire("Erro!", "CEP inválido. Deve conter 8 dígitos.", "error");
       return throwError(() => new Error("CEP inválido."));
     }
 
-    console.log(`🔍 Buscando CEP ${cepFormatado} na API ViaCEP...`);
     return this.http.get(`${this.viaCepUrl}/${cepFormatado}/json`).pipe(
       catchError(() => {
         Swal.fire("Erro!", "Erro ao buscar o CEP.", "error");
